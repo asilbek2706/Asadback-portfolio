@@ -1,0 +1,9 @@
+$primary: #007bff;
+$dark: #121212;
+
+@import "bootstrap/scss/bootstrap";
+body {
+  background-color: $dark;
+  color: white;
+  font-family: 'Inter', sans-serif;
+}
