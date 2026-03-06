@@ -2,7 +2,10 @@ import Home from './pages/Home/Home.tsx';
 
 function App() {
     return (
-        <Home />
+        <>
+            <Home />
+            <h1>Boshlandi</h1>
+        </>
     );
 }
 
