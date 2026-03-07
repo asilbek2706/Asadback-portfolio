@@ -1,0 +1,72 @@
+.background-fixed {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -10;
+  background-color: #0e0e0e;
+  overflow: hidden;
+
+  .spiro-geometry {
+    position: absolute;
+    top: 0;
+    right: -50%;
+    width: 1400px;
+    height: 900px;
+    opacity: 0.2;
+    transition: opacity 1s ease;
+
+    &.animating {
+      animation: rotateSpiro 50s linear infinite;
+    }
+
+    .shape-node {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 40% 60% 70% 30% / 40% 50% 60% 50%;
+      transform-origin: center center;
+      mix-blend-mode: screen;
+    }
+
+    .core-node {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 20px;
+      height: 20px;
+      background-color: rgba(255, 255, 255, 0.4);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 30px 10px rgba(255, 255, 255, 0.05);
+    }
+  }
+
+  .bg-gradient-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 30vh;
+    background: linear-gradient(to top, rgba(14, 14, 14, 1), rgba(14, 14, 14, 0));
+    z-index: -5;
+  }
+}
+
+@keyframes rotateSpiro {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@media (max-width: 992px) {
+  .background-fixed .spiro-geometry {
+    width: 400px;
+    height: 800px;
+    top: 5%;
+    right: -20%;
+  }
+}
