@@ -10,7 +10,9 @@
         "preview": "vite preview"
     },
     "dependencies": {
+        "@studio-freight/lenis": "^1.0.42",
         "@tailwindcss/vite": "^4.2.1",
+        "aos": "^2.3.4",
         "axios": "^1.13.6",
         "bootstrap": "^5.3.8",
         "lucide-react": "^0.577.0",
@@ -22,6 +24,7 @@
     },
     "devDependencies": {
         "@eslint/js": "^9.39.1",
+        "@types/aos": "^3.0.7",
         "@types/node": "^24.10.1",
         "@types/react": "^19.2.7",
         "@types/react-dom": "^19.2.3",
