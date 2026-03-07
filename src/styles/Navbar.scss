@@ -10,8 +10,11 @@
   z-index: 1000;
   background: transparent;
 
-  .nav-logo{
-    content: 'Asadbek' !important;
+  @media (max-width: 992px) {
+    padding: 20px 40px;
+  }
+  @media (max-width: 576px) {
+    padding: 15px 25px;
   }
 
   .nav-logo a {
@@ -19,7 +22,17 @@
     letter-spacing: 3px;
     text-transform: uppercase;
     transition: opacity 0.3s ease;
-    &:hover { opacity: 0.7; }
+    color: #fff;
+    text-decoration: none;
+
+    &:hover {
+      opacity: 0.7;
+    }
+
+    @media (max-width: 576px) {
+      font-size: 0.9rem;
+      letter-spacing: 2px;
+    }
   }
 
   .nav-actions {
@@ -27,13 +40,19 @@
     align-items: center;
     gap: 50px;
 
+    @media (max-width: 768px) {
+      gap: 20px;
+    }
+
     .social-icons-top {
       display: flex;
       gap: 25px;
 
+
       a {
         color: rgba(255, 255, 255, 0.4);
         transition: all 0.3s ease;
+
         &:hover {
           color: #fff;
           transform: translateY(-2px);
@@ -59,8 +78,12 @@
     }
 
     &.open {
-      .line:nth-child(1) { transform: translateY(4.5px) rotate(45deg); }
-      .line:nth-child(2) { transform: translateY(-4px) rotate(-45deg); }
+      .line:nth-child(1) {
+        transform: translateY(4.5px) rotate(45deg);
+      }
+      .line:nth-child(2) {
+        transform: translateY(-4px) rotate(-45deg);
+      }
     }
   }
 
@@ -76,7 +99,20 @@
     padding: 120px 50px;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
 
-    &.active { right: 0; }
+    @media (max-width: 1200px) {
+      width: 35%;
+    }
+    @media (max-width: 992px) {
+      width: 50%;
+    }
+    @media (max-width: 576px) {
+      width: 50%;
+      padding: 100px 30px;
+    }
+
+    &.active {
+      right: 0;
+    }
 
     .sidebar-content {
       height: 100%;
@@ -101,9 +137,14 @@
             transition: all 0.4s ease;
             position: relative;
 
+            @media (max-width: 576px) {
+              font-size: 1.3rem;
+            }
+
             &:hover {
               padding-left: 15px;
               color: rgba(255, 255, 255, 0.5);
+
               &::before {
                 content: '';
                 position: absolute;
@@ -135,6 +176,7 @@
             color: #fff;
             opacity: 0.5;
             transition: all 0.3s ease;
+
             &:hover {
               opacity: 1;
               transform: scale(1.1);
@@ -155,11 +197,4 @@
     backdrop-filter: blur(5px);
     z-index: 1040;
   }
-}
-
-@media (max-width: 1400px) { .nav-sidebar { width: 35%; } }
-@media (max-width: 992px) { .nav-sidebar { width: 50%; } }
-@media (max-width: 768px) {
-  .custom-navbar { padding: 20px 30px; }
-  .nav-sidebar { width: 85%; padding: 100px 30px; }
 }
