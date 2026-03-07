@@ -1,51 +1,122 @@
-.image-stack-container {
-  position: relative;
-  width: 100%;
-  max-width: 420px;
-  margin: 0 auto;
+.hero-section {
+  min-height: 100vh;
+  padding-left: 20px;
 
-  .image-layer {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    background: transparent;
-    pointer-events: none;
-  }
+  .hero-content {
+    max-width: 800px;
+    animation: fadeInUp 1s ease-out;
 
-  // Qatlamlarning siljishi (stack effect)
-  .layer-2 { transform: translate(-10px, 10px); }
-  .layer-3 { transform: translate(-20px, 20px); }
-
-  .main-image-wrapper {
-    position: relative;
-    z-index: 5;
-    background: transparent;
-
-    .hero-main-img {
-      width: 100%;
-      height: auto;
-      display: block;
-      transition: opacity 0.3s ease;
-      background-color: transparent;
+    .divider-short {
+      width: 50px;
+      height: 1.5px;
+      background: rgba(255, 255, 255, 0.4);
     }
-  }
 
-  .image-tag {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    z-index: 6;
-    font-size: 0.75rem;
-    color: rgba(255, 255, 255, 0.5);
-    font-family: 'JetBrains Mono', monospace;
+    h1 {
+      letter-spacing: -2px;
+
+      @media (max-width: 768px) {
+        font-size: 2.5rem;
+      }
+    }
+
+    .hero-description {
+      font-weight: 300;
+      line-height: 1.8;
+      max-width: 550px;
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .scroll-indicator-line {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      position: absolute;
+      bottom: 50px;
+      right: 0;
+      gap: 15px;
+
+      .line {
+        width: 1px;
+        height: 80px;
+        background: rgba(255, 255, 255, 0.2);
+        position: relative;
+        overflow: hidden;
+
+        &::after {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background: #fff;
+          animation: scrollLine 2s infinite cubic-bezier(0.7, 0, 0.3, 1);
+        }
+      }
+
+      .scroll-text {
+        font-size: 0.65rem;
+        letter-spacing: 3px;
+        writing-mode: vertical-rl;
+        color: #fff;
+        opacity: 0.5;
+        font-weight: 600;
+      }
+    }
   }
 }
 
-.divider-short {
-  width: 50px;
-  height: 1px;
-  background-color: rgba(255, 255, 255, 0.3);
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(30px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes scrollLine {
+  0% { transform: translateY(-100%); }
+  100% { transform: translateY(100%); }
+}
+
+// Hero section uchun maxsus responsivlik qismi
+.hero-section {
+  // Planshetlar uchun (992px va undan kichik)
+  @media (max-width: 992px) {
+    padding-left: 0;
+    display: flex;
+    justify-content: center;
+    text-align: center;
+
+    .hero-content {
+      .divider-short {
+        margin: 0 auto; // Chiziqchani markazga surish
+      }
+
+      h1 {
+        font-size: 3rem; // Sarlavhani kichraytirish
+      }
+
+      .hero-description {
+        margin: 0 auto 30px; // Tavsifni markazga surish
+      }
+
+      .scroll-indicator-line {
+        display: none; // Mobilda joyni tejash uchun yashirish
+      }
+    }
+  }
+
+  // Kichik mobil qurilmalar uchun (576px va undan kichik)
+  @media (max-width: 576px) {
+    .hero-content {
+      h1 {
+        font-size: 2.2rem; // Mobilda sarlavha o'lchami
+        letter-spacing: -1px;
+      }
+
+      .hero-description {
+        font-size: 0.9rem;
+        padding: 0 10px;
+      }
+    }
+  }
 }

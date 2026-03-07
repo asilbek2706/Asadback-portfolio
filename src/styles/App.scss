@@ -1,0 +1,59 @@
+.app-main-wrapper {
+    color: #fff;
+    min-height: 100vh;
+}
+
+.layout-container {
+    display: flex;
+    width: 100%;
+
+    .scrollable-content {
+        margin-left: 45%;
+        width: 55%;
+        padding: 0 60px;
+        position: relative;
+        z-index: 5;
+
+        @media (max-width: 992px) {
+            margin-left: 0;
+            width: 100%;
+            padding: 0 25px;
+        }
+
+        .site-footer {
+            padding: 60px 0;
+            text-align: center;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+            font-size: 0.75rem;
+            letter-spacing: 1px;
+            color: rgba(255, 255, 255, 0.2);
+        }
+    }
+}
+
+html.lenis {
+    height: auto;
+}
+
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+[data-aos] {
+    pointer-events: none;
+    &.aos-animate {
+        pointer-events: auto;
+    }
+}
