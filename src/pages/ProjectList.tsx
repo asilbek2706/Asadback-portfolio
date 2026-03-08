@@ -1,5 +1,5 @@
 import React from 'react';
-import { Github, ExternalLink, ArrowRight } from 'lucide-react';
+import { ArrowRight, ExternalLink, Github } from 'lucide-react';
 import { useAboutStore } from '../store/useAboutStore';
 import '../styles/projects/ProjectList.scss';
 
@@ -12,10 +12,13 @@ const ProjectList: React.FC = () => {
         <section id="projects" className="projects-section py-5">
             <div className="container">
                 <header className="section-header mb-5" data-aos="fade-up">
-                    <h2 className="display-4 fw-light text-white">
+                    <span className="text-uppercase small tracking-widest text-secondary fw-bold">
+                        Portfolio
+                    </span>
+                    <h2 className="display-5 fw-light text-white mt-2">
                         Tanlangan loyihalar
                     </h2>
-                    <div className="divider-short"></div>
+                    <div className="divider-short mt-3"></div>
                 </header>
 
                 <div className="projects-grid">

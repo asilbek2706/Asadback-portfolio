@@ -3,15 +3,19 @@ import type { ApiResponse, Project } from '../types';
 
 export const getProjects = async (): Promise<Project[]> => {
     try {
-        const response = await api.get<ApiResponse<Project>>('/projects/');
+        const response = await api.get<ApiResponse<Project[]>>('/projects/');
 
-        if (response.data.status) {
-            return response.data.data; // data — bu Project[] massivi
+        const { status, data } = response.data;
+
+        if (status && Array.isArray(data)) {
+            return data;
         }
 
         return [];
-    } catch (error) {
-        console.error('Loyihalarni olishda xatolik:', error);
+    } catch (error: any) {
+        const msg = error.response?.data?.message || error.message;
+        console.error(`[ProjectService Error]: ${msg}`);
+
         return [];
     }
 };

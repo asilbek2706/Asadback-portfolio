@@ -1,76 +1,120 @@
 .projects-section {
-  .projects-grid {
-    display: flex;
-    flex-direction: column;
-    gap: 50px;
-    align-items: flex-end;
+  .section-header {
+    .divider-short {
+      width: 40px;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.3);
+    }
   }
 
-  .project-card {
-    width: 100%;
-    max-width: 850px;
-    position: relative;
-    cursor: pointer;
+  .projects-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 30px;
 
-    .project-image-wrapper {
-      height: 480px;
-      overflow: hidden;
-      position: relative;
-      background: #151515;
-
-      @media (max-width: 768px) {
-        height: 280px;
-      }
-
-      .project-img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        opacity: 0.6;
-        transition: 0.8s cubic-bezier(0.2, 1, 0.3, 1);
-      }
+    @media (max-width: 576px) {
+      grid-template-columns: 1fr;
     }
 
-    .project-overlay {
-      position: absolute;
-      inset: 0;
-      background: linear-gradient(90deg, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.1) 100%);
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-end;
-      padding: 40px;
-      opacity: 0;
-      transition: 0.4s ease;
+    .project-card {
+      position: relative;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
-      .project-info {
-        transform: translateY(20px);
-        transition: 0.5s ease;
+      &:hover {
+        transform: translateY(-10px);
+        border-color: rgba(255, 255, 255, 0.1);
 
-        .project-title {
-          font-size: 2.2rem;
-          font-weight: 300;
-          margin-bottom: 15px;
-          border-bottom: 1px solid #fff;
-          padding-bottom: 8px;
-        }
+        .project-image-wrapper {
+          .project-img {
+            transform: scale(1.1);
+            filter: grayscale(0);
+          }
 
-        .project-links {
-          display: flex;
-          gap: 15px;
-          a {
-            color: #fff;
-            opacity: 0.7;
-            &:hover { opacity: 1; transform: scale(1.1); }
+          .project-overlay {
+            opacity: 1;
+            background: linear-gradient(
+                            to top,
+                            rgba(0, 0, 0, 0.9) 0%,
+                            rgba(0, 0, 0, 0.4) 50%,
+                            transparent 100%
+            );
+
+            .project-info {
+              transform: translateY(0);
+            }
+
+            .project-arrow {
+              transform: translateX(0);
+              opacity: 1;
+            }
           }
         }
       }
-    }
 
-    &:hover {
-      .project-img { transform: scale(1.05); opacity: 0.8; }
-      .project-overlay {
-        opacity: 1;
-        .project-info { transform: translateY(0); }
+      .project-image-wrapper {
+        position: relative;
+        width: 100%;
+        height: 280px;
+        overflow: hidden;
+
+        .project-img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          filter: grayscale(20%);
+          transition: all 0.6s ease;
+        }
+
+        .project-overlay {
+          position: absolute;
+          inset: 0;
+          opacity: 0;
+          display: flex;
+          flex-direction: column;
+          justify-content: flex-end;
+          padding: 30px;
+          transition: all 0.4s ease;
+
+          .project-info {
+            transform: translateY(20px);
+            transition: all 0.4s ease 0.1s;
+
+            .project-title {
+              font-size: 1.5rem;
+              font-weight: 300;
+              color: #fff;
+              margin-bottom: 15px;
+            }
+
+            .project-links {
+              display: flex;
+              gap: 15px;
+
+              a {
+                color: rgba(255, 255, 255, 0.6);
+                transition: 0.3s;
+
+                &:hover {
+                  color: #fff;
+                  transform: translateY(-3px);
+                }
+              }
+            }
+          }
+
+          .project-arrow {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: #fff;
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.4s ease 0.2s;
+          }
+        }
       }
     }
   }

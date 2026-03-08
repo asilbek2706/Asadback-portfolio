@@ -51,6 +51,19 @@ html.lenis {
     pointer-events: none;
 }
 
+.initial-loader-wrapper {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+    transition: opacity 0.8s cubic-bezier(0.19, 1, 0.22, 1),
+    visibility 0.8s;
+
+    &.fade-out {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+
 [data-aos] {
     pointer-events: none;
     &.aos-animate {
