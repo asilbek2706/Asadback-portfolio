@@ -1,0 +1,76 @@
+.initial-loader-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  background: #050505;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+
+  .loader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    max-width: 300px;
+
+    .brand-name {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.2rem;
+      letter-spacing: 0.5rem;
+      color: #fff;
+      font-weight: 300;
+      animation: pulse-text 2s ease-in-out infinite;
+    }
+
+    .progress-container {
+      width: 100%;
+      height: 2px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+
+      .progress-bar {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 0;
+        background: #fff;
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        animation: progress-fill 2.5s cubic-bezier(0.65, 0, 0.35, 1) forwards;
+      }
+    }
+
+    .status-text {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.65rem;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+  }
+}
+
+@keyframes progress-fill {
+  0% { width: 0; }
+  30% { width: 40%; }
+  60% { width: 70%; }
+  100% { width: 100%; }
+}
+
+@keyframes pulse-text {
+  0%, 100% { opacity: 0.5; transform: scale(0.98); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+.initial-loader-hide {
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.8s cubic-bezier(0.19, 1, 0.22, 1);
+  transform: scale(1.1);
+}

@@ -1,0 +1,106 @@
+.about-section {
+  padding: 100px 0;
+  position: relative;
+
+  .about-container {
+    max-width: 1100px;
+  }
+
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 80px;
+    align-items: center;
+
+    @media (max-width: 1200px) {
+      grid-template-columns: 1fr;
+      gap: 50px;
+    }
+  }
+
+  .about-main-info {
+    .label-tag {
+      font-size: 10px;
+      letter-spacing: 4px;
+      color: rgba(255, 255, 255, 0.4);
+      margin-bottom: 20px;
+      border-left: 2px solid #fff;
+      padding-left: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      font-weight: 200;
+      line-height: 1.1;
+      margin-bottom: 30px;
+      color: #fff;
+    }
+
+    .about-description {
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.6);
+      line-height: 1.8;
+      margin-bottom: 40px;
+      font-weight: 300;
+    }
+
+    .education-box {
+      display: flex;
+      flex-direction: column;
+      gap: 5px;
+
+      .edu-label {
+        font-size: 12px;
+        color: rgba(255, 255, 255, 0.3);
+        text-transform: uppercase;
+        letter-spacing: 2px;
+      }
+      .edu-value {
+        color: #fff;
+        font-weight: 400;
+      }
+    }
+  }
+
+  .about-skills-info {
+    .skills-wrap {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 15px;
+    }
+
+    .skill-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 100px;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+        transform: translateX(10px);
+
+        .skill-pill-icon {
+          color: #fff;
+        }
+      }
+
+      .skill-pill-icon {
+        color: rgba(255, 255, 255, 0.4);
+        transition: 0.3s;
+      }
+
+      .skill-pill-name {
+        font-size: 0.9rem;
+        color: #fff;
+        font-weight: 300;
+        letter-spacing: 1px;
+      }
+    }
+  }
+}

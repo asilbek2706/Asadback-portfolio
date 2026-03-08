@@ -1,48 +1,42 @@
 export interface ApiResponse<T> {
-    status: boolean;
-    statuscode: number;
-    message: string;
-    data: T[];
-    timestamp: string;
+    readonly status: boolean;
+    readonly statuscode: number;
+    readonly message: string;
+    readonly data: T;
+    readonly timestamp: string;
 }
 
 export interface AboutData {
-    firstname: string;
-    lastname: string;
-    image: string;
-    about_text: string;
-    phone_number: string;
-    email: string;
-    github_link: string;
-    telegram_link: string;
-    instagram_link: string;
+    readonly firstname: string;
+    readonly lastname: string;
+    readonly image: string;
+    readonly about_text: string;
+    readonly phone_number: string;
+    readonly email: string;
+    readonly github_link: string;
+    readonly telegram_link: string;
+    readonly instagram_link: string;
 }
 
 export interface Project {
-    id?: number;
-    project_name: string;
-    project_image: string;
-    project_description: string;
-    project_link: string;
-    project_github_link: string;
-    created_at: string;
+    readonly id: number;
+    readonly project_name: string;
+    readonly project_image: string;
+    readonly project_description: string;
+    readonly project_link?: string;
+    readonly project_github_link?: string;
+    readonly created_at: string;
 }
 
 export interface Question {
-    name: string;
-    email: string;
-    message: string;
-    answer?: string;
-    created_at?: string;
-}
-
-export interface ContactFormData {
-    name: string;
-    email: string;
-    message: string;
+    readonly name: string;
+    readonly email: string;
+    readonly message: string;
+    readonly answer?: string;
+    readonly created_at?: string;
 }
 
 export interface StatusState {
-    type: 'success' | 'danger' | 'info';
-    msg: string;
+    readonly type: 'success' | 'danger' | 'info' | 'warning';
+    readonly msg: string;
 }

@@ -3,43 +3,75 @@ import type { AboutData, Project } from '../types';
 import { getAboutInfo } from '../services/aboutService';
 import { getProjects } from '../services/projectService';
 
-interface AboutStore {
+interface AboutState {
     aboutInfo: AboutData | null;
     projects: Project[];
     isLoading: boolean;
     error: string | null;
-    setAboutInfo: (info: AboutData) => void;
-    setProjects: (projects: Project[]) => void;
-    setLoading: (status: boolean) => void;
-    fetchAllData: () => Promise<void>;
+    isInitialized: boolean;
 }
 
-export const useAboutStore = create<AboutStore>((set) => ({
+interface AboutActions {
+    fetchAllData: (forceRefresh?: boolean) => Promise<void>;
+    resetStore: () => void;
+}
+
+export const useAboutStore = create<AboutState & AboutActions>((set, get) => ({
     aboutInfo: null,
     projects: [],
-    isLoading: true,
+    isLoading: false,
     error: null,
+    isInitialized: false,
 
-    setAboutInfo: (info) => set({ aboutInfo: info }),
-    setProjects: (projects) => set({ projects: projects }),
-    setLoading: (status) => set({ isLoading: status }),
+    fetchAllData: async (forceRefresh = false) => {
+        // Agar ma'lumotlar yuklangan bo'lsa va majburiy yangilash bo'lmasa, so'rov yubormaymiz
+        if (get().isInitialized && !forceRefresh) return;
 
-    fetchAllData: async () => {
         set({ isLoading: true, error: null });
+
         try {
-            // Parallel yuklash orqali vaqtdan yutamiz
-            const [aboutRes, projectsRes] = await Promise.all([
+            // 1. Ma'lumotlarni parallel ravishda olishni boshlaymiz
+            const [aboutRes, projectsRes] = await Promise.allSettled([
                 getAboutInfo(),
                 getProjects(),
             ]);
 
-            if (aboutRes) set({ aboutInfo: aboutRes });
-            if (projectsRes) set({ projects: projectsRes });
-        } catch (err) {
-            set({ error: "Ma'lumotlarni yuklashda xatolik" });
-            console.error('Fetch error:', err);
+            // 2. SUN'IY DELAY (1000ms)
+            // Bu InitialLoader o'zining premium effektini ko'rsatib ulgurishi uchun kerak
+            await new Promise((resolve) => setTimeout(resolve, 1000));
+
+            const newState: Partial<AboutState> = { isInitialized: true };
+
+            // About ma'lumotlarini tekshirish
+            if (aboutRes.status === 'fulfilled' && aboutRes.value) {
+                newState.aboutInfo = aboutRes.value;
+            } else if (aboutRes.status === 'rejected') {
+                console.error('About Info Fetch Error:', aboutRes.reason);
+            }
+
+            // Loyihalarni tekshirish
+            if (projectsRes.status === 'fulfilled' && projectsRes.value) {
+                newState.projects = projectsRes.value;
+            } else if (projectsRes.status === 'rejected') {
+                console.error('Projects Fetch Error:', projectsRes.reason);
+            }
+
+            // Yangi holatni saqlaymiz
+            set(newState);
+        } catch (error) {
+            set({ error: 'Tizimda kutilmagan xatolik yuz berdi' });
+            console.error('Store Fetch All Error:', error);
         } finally {
-            setTimeout(() => set({ isLoading: false }), 1200);
+            // 3. Loaderning silliq g'oyib bo'lishi uchun oxirgi kichik delay
+            setTimeout(() => set({ isLoading: false }), 500);
         }
     },
+
+    resetStore: () =>
+        set({
+            aboutInfo: null,
+            projects: [],
+            isInitialized: false,
+            error: null,
+        }),
 }));
