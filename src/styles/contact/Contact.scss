@@ -1,0 +1,128 @@
+$text-light: #ffffff;
+$text-dim: rgba(255, 255, 255, 0.6);
+$border-color: rgba(255, 255, 255, 0.2);
+
+:global {
+  .grecaptcha-badge {
+    visibility: hidden !important;
+    opacity: 0 !important;
+  }
+}
+
+.contact-section {
+  padding: 120px 0;
+  color: $text-light;
+
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  h2 {
+    font-size: clamp(2.2rem, 4.5vw, 3.2rem);
+    font-weight: 300;
+    line-height: 1.2;
+    margin-bottom: 25px;
+  }
+
+  .section-description {
+    font-size: 1.1rem;
+    color: $text-dim;
+    margin-bottom: 70px;
+    font-weight: 300;
+  }
+}
+
+.contact-form {
+  .input-group-wrapper {
+    position: relative;
+    margin-bottom: 50px;
+
+    .required-star {
+      position: absolute;
+      left: 0;
+      top: 15px;
+      color: $text-light;
+    }
+
+    input, textarea {
+      width: 100%;
+      padding: 15px 0 15px 25px;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid $border-color;
+      color: $text-light;
+      font-size: 1.1rem;
+      outline: none;
+      transition: all 0.3s ease;
+
+      &:focus {
+        border-bottom-color: $text-light;
+        transform: translateY(-2px);
+      }
+    }
+
+    textarea {
+      resize: none;
+      min-height: 160px;
+    }
+  }
+
+  .submit-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    .submit-btn {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+      background: transparent;
+      border: none;
+      color: $text-light;
+      font-size: 1.4rem;
+      cursor: pointer;
+
+      .arrow-circle {
+        width: 45px;
+        height: 45px;
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        svg {
+          width: 18px;
+          fill: $text-light;
+        }
+      }
+
+      &.loading .arrow-circle {
+        animation: rotate 0.8s linear infinite;
+      }
+    }
+
+    .required-note {
+      font-size: 0.9rem;
+      color: $text-dim;
+    }
+  }
+
+  .recaptcha-terms {
+    font-size: 0.75rem;
+    color: $text-dim;
+    margin-top: 25px;
+    font-weight: 300;
+
+    a {
+      color: $text-light;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+  }
+}
+
+@keyframes rotate {
+  to { transform: rotate(360deg); }
+}

@@ -6,8 +6,7 @@ import axios, {
 
 const api = axios.create({
     baseURL:
-        import.meta.env.VITE_API_URL ||
-        'https://api.asilbek-karomatov.dev/api/v1',
+        import.meta.env.VITE_API_URL || 'https://api.asadback.uz/api/v1',
     timeout: 15000,
     headers: {
         'Content-Type': 'application/json',

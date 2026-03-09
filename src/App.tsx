@@ -3,6 +3,7 @@ import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import About from './pages/About';
 import ProjectList from './pages/ProjectList';
+import Contact from './pages/Contact';
 import Background from './shared/Background';
 import SidebarImage from './components/SidebarImage';
 import InitialLoader from './components/loader/InitialLoader';
@@ -85,22 +86,29 @@ const App: React.FC = () => {
 
                                 <section
                                     data-aos="fade-up"
-                                    data-aos-delay="800"
+                                    data-aos-delay="600"
                                 >
                                     <About />
                                 </section>
 
                                 <section
                                     data-aos="fade-up"
-                                    data-aos-delay="1200"
+                                    data-aos-delay="900"
                                 >
                                     <ProjectList />
+                                </section>
+
+                                <section
+                                    data-aos="fade-up"
+                                    data-aos-delay="1200"
+                                >
+                                    <Contact />
                                 </section>
 
                                 <footer
                                     className="site-footer"
                                     data-aos="fade-in"
-                                    data-aos-delay="1500"
+                                    data-aos-delay="1400"
                                     data-aos-offset="0"
                                 >
                                     <p className="m-0">
