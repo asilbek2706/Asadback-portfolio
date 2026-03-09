@@ -1,106 +1,231 @@
 .about-section {
-  padding: 100px 0;
+  padding: clamp(80px, 10vh, 150px) 0;
+  background: transparent;
   position: relative;
+  overflow: hidden;
 
   .about-container {
     max-width: 1100px;
+    margin: 0 auto;
   }
 
   .about-grid {
     display: grid;
-    grid-template-columns: 1.2fr 0.8fr;
-    gap: 80px;
-    align-items: center;
-
-    @media (max-width: 1200px) {
-      grid-template-columns: 1fr;
-      gap: 50px;
-    }
+    grid-template-columns: 1.1fr 0.9fr;
+    gap: 100px;
+    align-items: start;
   }
 
   .about-main-info {
     .label-tag {
-      font-size: 10px;
-      letter-spacing: 4px;
-      color: rgba(255, 255, 255, 0.4);
-      margin-bottom: 20px;
-      border-left: 2px solid #fff;
-      padding-left: 10px;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.3em;
+      color: #555;
+      margin-bottom: 40px;
+      display: block;
     }
 
     .section-title {
-      font-size: clamp(2.5rem, 5vw, 4rem);
-      font-weight: 200;
-      line-height: 1.1;
-      margin-bottom: 30px;
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 300;
+      line-height: 0.95;
+      margin-bottom: 50px;
       color: #fff;
+      letter-spacing: -0.04em;
+
+      span {
+        color: rgba(255, 255, 255, 0.3);
+      }
     }
 
     .about-description {
-      font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.6);
-      line-height: 1.8;
-      margin-bottom: 40px;
+      font-size: 1.15rem;
+      color: rgba(255, 255, 255, 0.7);
+      line-height: 1.7;
+      margin-bottom: 60px;
       font-weight: 300;
+      max-width: 500px;
     }
 
     .education-box {
-      display: flex;
-      flex-direction: column;
-      gap: 5px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+      padding-top: 30px;
+      display: inline-block;
 
       .edu-label {
-        font-size: 12px;
-        color: rgba(255, 255, 255, 0.3);
+        font-size: 10px;
+        color: #444;
         text-transform: uppercase;
         letter-spacing: 2px;
+        margin-bottom: 8px;
+        display: block;
       }
       .edu-value {
         color: #fff;
-        font-weight: 400;
+        font-size: 1.1rem;
+        font-weight: 300;
       }
     }
   }
 
   .about-skills-info {
+    position: sticky;
+    top: 100px;
+
     .skills-wrap {
       display: flex;
-      flex-wrap: wrap;
-      gap: 15px;
+      flex-direction: column;
+      gap: 20px;
     }
 
     .skill-pill {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      padding: 12px 20px;
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(255, 255, 255, 0.05);
-      border-radius: 100px;
-      backdrop-filter: blur(10px);
-      transition: all 0.3s ease;
+      padding: 15px 0;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 0;
+      backdrop-filter: none;
+      transition: all 0.4s cubic-bezier(0.215, 0.61, 0.355, 1);
 
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: rgba(255, 255, 255, 0.3);
-        transform: translateX(10px);
+        padding-left: 10px;
+        border-bottom-color: rgba(255, 255, 255, 0.3);
 
-        .skill-pill-icon {
-          color: #fff;
-        }
-      }
-
-      .skill-pill-icon {
-        color: rgba(255, 255, 255, 0.4);
-        transition: 0.3s;
+        .skill-pill-name { color: #fff; }
+        .skill-pill-icon { transform: rotate(45deg); color: #fff; }
       }
 
       .skill-pill-name {
-        font-size: 0.9rem;
-        color: #fff;
+        font-size: 1rem;
+        color: rgba(255, 255, 255, 0.4);
         font-weight: 300;
-        letter-spacing: 1px;
+        text-transform: lowercase;
+      }
+
+      .skill-pill-icon {
+        font-size: 0.8rem;
+        color: rgba(255, 255, 255, 0.2);
+        transition: 0.4s;
       }
     }
+  }
+}
+/* --- ABOUT SECTION PERFECT RESPONSIVE --- */
+
+// 1. Kichik noutbuklar (Laptops)
+@media (max-width: 1200px) {
+  .about-section {
+    .about-container {
+      padding: 0 40px;
+    }
+    .about-grid {
+      gap: 60px;
+    }
+  }
+}
+
+// 2. Planshetlar (Tablets Landscape/Portrait)
+@media (max-width: 1024px) {
+  .about-section {
+    padding: 100px 0;
+
+    .about-grid {
+      grid-template-columns: 1fr; // Ustunlar bitta qatorga tushadi
+      gap: 80px;
+    }
+
+    .about-main-info {
+      .about-description {
+        max-width: 100%; // Matn to'liq kenglikni egallaydi
+      }
+    }
+
+    .about-skills-info {
+      position: relative; // Sticky effekti planshetda kerak emas
+      top: 0;
+
+      .skills-wrap {
+        display: grid;
+        grid-template-columns: 1fr 1fr; // Skillar ikki ustun bo'lib chiqadi
+        gap: 0 40px;
+      }
+    }
+  }
+}
+
+// 3. Kichik planshet va katta telefonlar
+@media (max-width: 768px) {
+  .about-section {
+    padding: 80px 0;
+
+    .about-main-info {
+      .label-tag {
+        margin-bottom: 25px;
+      }
+      .section-title {
+        font-size: 3rem;
+        margin-bottom: 35px;
+      }
+      .about-description {
+        margin-bottom: 45px;
+      }
+    }
+
+    .about-skills-info {
+      .skills-wrap {
+        grid-template-columns: 1fr; // Skillar yana bir ustunga qaytadi
+      }
+    }
+  }
+}
+
+// 4. Smartfonlar (Phones)
+@media (max-width: 480px) {
+  .about-section {
+    padding: 60px 0;
+
+    .about-container {
+      padding: 0 20px;
+    }
+
+    .about-main-info {
+      .section-title {
+        font-size: 2.4rem;
+        letter-spacing: -0.02em;
+      }
+
+      .about-description {
+        font-size: 1rem;
+        line-height: 1.6;
+      }
+
+      .education-box {
+        width: 100%;
+        .edu-value {
+          font-size: 1rem;
+        }
+      }
+    }
+
+    .about-skills-info {
+      .skill-pill {
+        padding: 12px 0;
+
+        .skill-pill-name {
+          font-size: 0.9rem;
+        }
+      }
+    }
+  }
+}
+
+// 5. Juda kichik ekranlar
+@media (max-width: 360px) {
+  .about-section .about-main-info .section-title {
+    font-size: 2rem;
   }
 }

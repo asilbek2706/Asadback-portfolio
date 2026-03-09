@@ -126,3 +126,76 @@ $border-color: rgba(255, 255, 255, 0.2);
 @keyframes rotate {
   to { transform: rotate(360deg); }
 }
+
+@media (max-width: 1024px) {
+  .contact-section {
+    padding: 100px 0;
+
+    .container {
+      max-width: 90%;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 80px 0;
+
+    h2 {
+      margin-bottom: 20px;
+    }
+
+    .section-description {
+      margin-bottom: 50px;
+      font-size: 1rem;
+    }
+  }
+
+  .contact-form {
+    .input-group-wrapper {
+      margin-bottom: 40px;
+
+      input, textarea {
+        font-size: 1rem;
+      }
+    }
+
+    .submit-wrapper {
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 20px;
+
+      .submit-btn {
+        font-size: 1.2rem;
+
+        .arrow-circle {
+          width: 40px;
+          height: 40px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 60px 0;
+  }
+
+  .contact-form {
+    .input-group-wrapper {
+      margin-bottom: 30px;
+
+      input, textarea {
+        padding: 12px 0 12px 20px;
+      }
+    }
+
+    .submit-wrapper .submit-btn {
+      width: 100%;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 15px;
+    }
+  }
+}

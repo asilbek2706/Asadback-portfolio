@@ -77,46 +77,80 @@
   100% { transform: translateY(100%); }
 }
 
-// Hero section uchun maxsus responsivlik qismi
-.hero-section {
-  // Planshetlar uchun (992px va undan kichik)
-  @media (max-width: 992px) {
-    padding-left: 0;
-    display: flex;
-    justify-content: center;
-    text-align: center;
+@media (max-width: 1200px) {
+  .hero-section {
+    .hero-content {
+      max-width: 700px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .hero-section {
+    padding-left: 40px;
 
     .hero-content {
-      .divider-short {
-        margin: 0 auto; // Chiziqchani markazga surish
-      }
-
-      h1 {
-        font-size: 3rem; // Sarlavhani kichraytirish
-      }
-
-      .hero-description {
-        margin: 0 auto 30px; // Tavsifni markazga surish
-      }
-
       .scroll-indicator-line {
-        display: none; // Mobilda joyni tejash uchun yashirish
+        right: 20px;
+        bottom: 30px;
+
+        .line {
+          height: 60px;
+        }
       }
     }
   }
+}
 
-  // Kichik mobil qurilmalar uchun (576px va undan kichik)
-  @media (max-width: 576px) {
+@media (max-width: 768px) {
+  .hero-section {
+    padding-left: 30px;
+    display: flex;
+    align-items: center;
+
+    .hero-content {
+      .divider-short {
+        width: 40px;
+        margin-bottom: 20px;
+      }
+
+      .hero-description {
+        font-size: 1rem;
+        line-height: 1.6;
+        max-width: 100%;
+        padding-right: 40px;
+      }
+
+      .scroll-indicator-line {
+        display: none;
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-section {
+    padding-left: 20px;
+    padding-right: 20px;
+
     .hero-content {
       h1 {
-        font-size: 2.2rem; // Mobilda sarlavha o'lchami
+        font-size: 2.2rem;
         letter-spacing: -1px;
       }
 
       .hero-description {
-        font-size: 0.9rem;
-        padding: 0 10px;
+        font-size: 0.95rem;
+        padding-right: 0;
       }
     }
+  }
+}
+
+@media (max-height: 600px) and (orientation: landscape) {
+  .hero-section {
+    padding-top: 100px;
+    padding-bottom: 50px;
+    min-height: auto;
   }
 }
