@@ -8,11 +8,11 @@ import Background from './shared/Background';
 import SidebarImage from './components/SidebarImage';
 import InitialLoader from './components/loader/InitialLoader';
 import { useAboutStore } from './store/useAboutStore';
-import Lenis from '@studio-freight/lenis';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './styles/App.scss';
 import ChatHistory from './components/ChatHistory.tsx';
+import Lenis from 'lenis';
 
 const App: React.FC = () => {
     const { fetchAllData, isLoading, isInitialized, aboutInfo } =
