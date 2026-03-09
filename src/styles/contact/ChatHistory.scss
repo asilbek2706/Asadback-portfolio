@@ -1,7 +1,6 @@
-// O'zgaruvchilar
 $text-light: #ffffff;
 $text-dim: rgba(255, 255, 255, 0.6);
-$bg-dark: #0e0e0e; // Shaffof bo'lmagan to'q fon
+$bg-dark: #0e0e0e;
 $border-white: rgba(255, 255, 255, 0.1);
 
 .chat-icon-fixed {
@@ -30,6 +29,7 @@ $border-white: rgba(255, 255, 255, 0.1);
 
   &.active {
     background: $text-light;
+
     svg {
       fill: #000;
       transform: rotate(90deg);
@@ -61,11 +61,11 @@ $border-white: rgba(255, 255, 255, 0.1);
 .chat-sidebar {
   position: fixed;
   top: 0;
-  right: -100%; // To'liq yashirish uchun
+  right: -100%;
   width: 400px;
   height: 100vh;
-  background: $bg-dark !important; // Orqadagi ikonkalarni to'sish uchun to'q rang
-  z-index: 99999 !important; // Eng yuqori qatlam
+  background: $bg-dark !important;
+  z-index: 99999 !important;
   display: flex;
   flex-direction: column;
   transition: right 0.5s cubic-bezier(0.19, 1, 0.22, 1);
@@ -78,7 +78,7 @@ $border-white: rgba(255, 255, 255, 0.1);
 
   .sidebar-header {
     padding: 35px 30px;
-    background: $bg-dark; // Header ham to'q bo'lishi shart
+    background: $bg-dark;
     border-bottom: 1px solid $border-white;
     display: flex;
     justify-content: space-between;
@@ -189,9 +189,60 @@ $border-white: rgba(255, 255, 255, 0.1);
   z-index: 99998 !important;
 }
 
+@media (max-width: 1024px) {
+  .chat-sidebar {
+    width: 350px;
+  }
+}
+
+@media (max-width: 768px) {
+  .chat-icon-fixed {
+    right: 20px;
+    bottom: 20px;
+    width: 50px;
+    height: 50px;
+  }
+
+  .chat-sidebar {
+    width: 80%;
+  }
+
+  .chat-sidebar .sidebar-header {
+    padding: 25px 20px;
+  }
+
+  .chat-sidebar .sidebar-content {
+    padding: 20px;
+  }
+}
+
 @media (max-width: 480px) {
   .chat-sidebar {
     width: 100%;
-    right: -100%;
+    border-left: none;
+  }
+
+  .chat-sidebar .sidebar-header h3 {
+    font-size: 1rem;
+  }
+
+  .chat-sidebar .sidebar-content .user-bubble {
+    max-width: 50%;
+    padding: 12px 15px;
+  }
+
+  .chat-overlay {
+    backdrop-filter: blur(3px);
+  }
+}
+
+@media (max-width: 360px) {
+  .chat-icon-fixed {
+    width: 45px;
+    height: 45px;
+  }
+
+  .chat-sidebar .sidebar-content .user-bubble p {
+    font-size: 0.85rem;
   }
 }

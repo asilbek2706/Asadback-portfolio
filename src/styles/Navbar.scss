@@ -10,16 +10,6 @@
   z-index: 1000;
   background: transparent;
 
-  @media (max-width: 992px) {
-    padding: 20px 40px;
-  }
-  @media (max-width: 576px) {
-    padding: 15px 25px;
-  }
-  @media (max-width: 430px) {
-    padding: 15px 25px;
-  }
-
   .nav-logo a {
     font-size: 1.1rem;
     letter-spacing: 3px;
@@ -31,21 +21,12 @@
     &:hover {
       opacity: 0.7;
     }
-
-    @media (max-width: 576px) {
-      font-size: 0.9rem;
-      letter-spacing: 2px;
-    }
   }
 
   .nav-actions {
     display: flex;
     align-items: center;
     gap: 50px;
-
-    @media (max-width: 768px) {
-      gap: 20px;
-    }
 
     .social-icons-top {
       display: flex;
@@ -84,6 +65,7 @@
       .line:nth-child(1) {
         transform: translateY(4.5px) rotate(45deg);
       }
+
       .line:nth-child(2) {
         transform: translateY(-4px) rotate(-45deg);
       }
@@ -101,17 +83,6 @@
     transition: right 0.5s cubic-bezier(0.77, 0, 0.175, 1);
     padding: 120px 50px;
     border-left: 1px solid rgba(255, 255, 255, 0.05);
-
-    @media (max-width: 1200px) {
-      width: 35%;
-    }
-    @media (max-width: 992px) {
-      width: 50%;
-    }
-    @media (max-width: 576px) {
-      width: 50%;
-      padding: 100px 30px;
-    }
 
     &.active {
       right: 0;
@@ -139,10 +110,6 @@
             display: inline-block;
             transition: all 0.4s ease;
             position: relative;
-
-            @media (max-width: 576px) {
-              font-size: 1.3rem;
-            }
 
             &:hover {
               padding-left: 15px;
@@ -199,5 +166,58 @@
     background: rgba(0, 0, 0, 0.5);
     backdrop-filter: blur(5px);
     z-index: 1040;
+  }
+}
+
+
+@media (max-width: 1200px) {
+  .custom-navbar {
+    padding: 25px 40px;
+
+    .nav-sidebar {
+      width: 25%;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .custom-navbar {
+    padding: 20px 30px;
+
+    .nav-actions .social-icons-top {
+      display: none;
+    }
+
+    .nav-sidebar {
+      width: 35%;
+      padding: 100px 40px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .custom-navbar {
+    .nav-logo a {
+      font-size: 0.9rem;
+    }
+
+    .nav-sidebar {
+      width: 50%;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .nav-sidebar {
+    width: 50%;
+    padding: 80px 30px;
+
+    .sidebar-content .nav-links li a {
+      font-size: 1.3rem;
+    }
+
+    .menu-overlay {
+      display: none;
+    }
   }
 }

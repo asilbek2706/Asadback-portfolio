@@ -12,14 +12,11 @@
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     gap: 30px;
 
-    @media (max-width: 576px) {
-      grid-template-columns: 1fr;
-    }
-
     .project-card {
       position: relative;
       background: rgba(255, 255, 255, 0.03);
       border: 1px solid rgba(255, 255, 255, 0.05);
+      border-radius: 10px;
       overflow: hidden;
       transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
 
@@ -113,6 +110,97 @@
             opacity: 0;
             transform: translateX(-20px);
             transition: all 0.4s ease 0.2s;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1200px) {
+  .projects-section {
+    .projects-grid {
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 20px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .projects-section {
+    .projects-grid {
+      .project-card {
+        .project-image-wrapper {
+          height: 250px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .projects-section {
+    .projects-grid {
+      grid-template-columns: 1fr;
+
+      .project-card {
+        .project-image-wrapper {
+          height: 300px;
+
+          .project-img {
+            filter: grayscale(0); // Mobil qurilmalarda rasm doim rangli bo'lgani yaxshi
+          }
+
+          .project-overlay {
+            opacity: 1;
+            background: linear-gradient(
+                            to top,
+                            rgba(0, 0, 0, 0.8) 0%,
+                            rgba(0, 0, 0, 0.2) 60%,
+                            transparent 100%
+            );
+
+            .project-info {
+              transform: translateY(0);
+            }
+
+            .project-arrow {
+              opacity: 1;
+              transform: translateX(0);
+            }
+          }
+        }
+
+        &:hover {
+          transform: none; // Mobil ekranda hover effekti ba'zan noqulay
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 480px) {
+  .projects-section {
+    .projects-grid {
+      .project-card {
+        .project-image-wrapper {
+          height: 220px;
+          padding: 20px;
+
+          .project-overlay {
+            padding: 20px;
+
+            .project-info {
+              .project-title {
+                font-size: 1.2rem;
+                margin-bottom: 10px;
+              }
+            }
+
+            .project-arrow {
+              top: 20px;
+              right: 20px;
+            }
           }
         }
       }
