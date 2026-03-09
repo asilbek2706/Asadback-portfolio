@@ -12,6 +12,7 @@ import Lenis from '@studio-freight/lenis';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import './styles/App.scss';
+import ChatHistory from './components/ChatHistory.tsx';
 
 const App: React.FC = () => {
     const { fetchAllData, isLoading, isInitialized, aboutInfo } =
@@ -22,7 +23,7 @@ const App: React.FC = () => {
         fetchAllData();
 
         const lenis = new Lenis({
-            duration: 2.2,
+            duration: 1.8,
             easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
             smoothWheel: true,
             wheelMultiplier: 0.7,
@@ -44,7 +45,7 @@ const App: React.FC = () => {
                 setShowInitialOverlay(false);
 
                 AOS.init({
-                    duration: 1800,
+                    duration: 1000,
                     easing: 'ease-out-quart',
                     once: true,
                     offset: 150,
@@ -52,7 +53,7 @@ const App: React.FC = () => {
                 });
 
                 setTimeout(() => AOS.refresh(), 200);
-            }, 400);
+            }, 200);
 
             return () => clearTimeout(timer);
         }
@@ -79,31 +80,33 @@ const App: React.FC = () => {
                             <>
                                 <section
                                     data-aos="fade-up"
-                                    data-aos-duration="2000"
+                                    data-aos-duration="200"
                                 >
                                     <Hero />
                                 </section>
 
                                 <section
                                     data-aos="fade-up"
-                                    data-aos-delay="600"
+                                    data-aos-delay="200"
                                 >
                                     <About />
                                 </section>
 
                                 <section
                                     data-aos="fade-up"
-                                    data-aos-delay="900"
+                                    data-aos-delay="200"
                                 >
                                     <ProjectList />
                                 </section>
 
                                 <section
                                     data-aos="fade-up"
-                                    data-aos-delay="1200"
+                                    data-aos-delay="200"
                                 >
                                     <Contact />
                                 </section>
+
+                                <ChatHistory />
 
                                 <footer
                                     className="site-footer"

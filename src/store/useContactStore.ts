@@ -1,55 +1,88 @@
 import { create } from 'zustand';
+import { createJSONStorage, persist } from 'zustand/middleware';
 import {
-    sendContactMessage,
     type ContactRequest,
+    sendContactMessage,
 } from '../services/contactService';
 import type { ApiResponse } from '../types';
+
+export interface ChatMessage {
+    name: string;
+    email: string;
+    message: string;
+    timestamp: string;
+    adminReply?: string;
+}
 
 interface ContactState {
     isSubmitting: boolean;
     isSuccess: boolean;
     error: string | null;
+    messages: ChatMessage[];
 }
 
 interface ContactActions {
     submitContact: (data: ContactRequest) => Promise<boolean>;
     resetStatus: () => void;
+    clearHistory: () => void;
 }
 
-export const useContactStore = create<ContactState & ContactActions>((set) => ({
-    isSubmitting: false,
-    isSuccess: false,
-    error: null,
+export const useContactStore = create<ContactState & ContactActions>()(
+    persist(
+        (set) => ({
+            isSubmitting: false,
+            isSuccess: false,
+            error: null,
+            messages: [],
 
-    submitContact: async (data: ContactRequest): Promise<boolean> => {
-        set({ isSubmitting: true, error: null, isSuccess: false });
+            submitContact: async (data: ContactRequest): Promise<boolean> => {
+                set({ isSubmitting: true, error: null, isSuccess: false });
 
-        try {
-            // response tipini ApiResponse<ContactRequest> deb belgilaymiz
-            const response: ApiResponse<ContactRequest> =
-                await sendContactMessage(data);
+                try {
+                    const response: ApiResponse<ContactRequest> =
+                        await sendContactMessage(data);
 
-            if (response.status) {
-                set({ isSuccess: true, isSubmitting: false });
-                return true;
-            }
+                    if (response.status) {
+                        const newMessage: ChatMessage = {
+                            name: data.name,
+                            email: data.email,
+                            message: data.message,
+                            timestamp: new Date().toISOString(),
+                        };
 
-            throw new Error(response.message || 'Xatolik yuz berdi');
-        } catch (err: unknown) {
-            let errorMessage = 'Xabar yuborishda xatolik yuz berdi';
+                        set((state) => ({
+                            isSuccess: true,
+                            isSubmitting: false,
+                            messages: [newMessage, ...state.messages],
+                        }));
+                        return true;
+                    }
 
-            if (err instanceof Error) {
-                errorMessage = err.message;
-            }
+                    throw new Error(response.message || 'Xatolik yuz berdi');
+                } catch (err: unknown) {
+                    let errorMessage = 'Xabar yuborishda xatolik yuz berdi';
 
-            set({
-                error: errorMessage,
-                isSubmitting: false,
-            });
-            return false;
+                    if (err instanceof Error) {
+                        errorMessage = err.message;
+                    }
+
+                    set({
+                        error: errorMessage,
+                        isSubmitting: false,
+                    });
+                    return false;
+                }
+            },
+
+            resetStatus: () =>
+                set({ isSuccess: false, error: null, isSubmitting: false }),
+
+            clearHistory: () => set({ messages: [] }),
+        }),
+        {
+            name: 'contact-history-storage',
+            storage: createJSONStorage(() => localStorage),
+            partialize: (state) => ({ messages: state.messages }),
         }
-    },
-
-    resetStatus: () =>
-        set({ isSuccess: false, error: null, isSubmitting: false }),
-}));
+    )
+);

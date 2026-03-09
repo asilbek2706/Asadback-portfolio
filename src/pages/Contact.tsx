@@ -1,17 +1,24 @@
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
     GoogleReCaptchaProvider,
     useGoogleReCaptcha,
 } from 'react-google-recaptcha-v3';
 import { useContactStore } from '../store/useContactStore';
 import '../styles/contact/Contact.scss';
+import type { ContactRequest } from '../services/contactService.ts';
+
+interface LocalFormData {
+    name: string;
+    email: string;
+    message: string;
+}
 
 const ContactForm: React.FC = () => {
     const { executeRecaptcha } = useGoogleReCaptcha();
     const { submitContact, isSubmitting, isSuccess, error, resetStatus } =
         useContactStore();
 
-    const [formData, setFormData] = useState({
+    const [formData, setFormData] = useState<LocalFormData>({
         name: '',
         email: '',
         message: '',
@@ -31,21 +38,39 @@ const ContactForm: React.FC = () => {
         e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
     ) => {
         if (isSuccess || error) resetStatus();
-        setFormData({ ...formData, [e.target.name]: e.target.value });
+        setFormData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
     };
 
     const handleSubmit = useCallback(
         async (e: React.FormEvent) => {
             e.preventDefault();
-            if (!executeRecaptcha) return;
 
-            const token = await executeRecaptcha('contact_form');
-            const success = await submitContact({
-                ...formData,
-                recaptcha_token: token,
-            });
+            if (!executeRecaptcha) {
+                console.error('reCAPTCHA yuklanmagan');
+                return;
+            }
 
-            if (success) setFormData({ name: '', email: '', message: '' });
+            try {
+                const token = await executeRecaptcha('contact_form');
+
+                if (!token) {
+                    console.error('Token olinmadi');
+                    return;
+                }
+
+                const payload: ContactRequest = {
+                    ...formData,
+                    recaptcha_token: token,
+                };
+
+                const success = await submitContact(payload);
+
+                if (success) {
+                    setFormData({ name: '', email: '', message: '' });
+                }
+            } catch (err) {
+                console.error('Xatolik tafsiloti:', err);
+            }
         },
         [executeRecaptcha, formData, submitContact]
     );
@@ -118,20 +143,6 @@ const ContactForm: React.FC = () => {
                 </p>
             </div>
 
-            <div className="recaptcha-terms">
-                This site is protected by reCAPTCHA and the Google
-                <a href="https://policies.google.com/privacy" target="_blank">
-                    {' '}
-                    Privacy Policy
-                </a>{' '}
-                and
-                <a href="https://policies.google.com/terms" target="_blank">
-                    {' '}
-                    Terms of Service
-                </a>{' '}
-                apply.
-            </div>
-
             {(isSuccess || error) && (
                 <div className="status-wrapper">
                     {isSuccess && (
@@ -147,10 +158,19 @@ const ContactForm: React.FC = () => {
 };
 
 const Contact: React.FC = () => {
-    const siteKey = '6LfAH2gsAAAAAKLLBq6V09t6nnUhKpfRAEBOKH3b';
+    const siteKey = '6LdlZ4QsAAAAAF0WlToteKn40veEaO0f6xMcCYAP';
 
     return (
-        <GoogleReCaptchaProvider reCaptchaKey={siteKey} language="uz">
+        <GoogleReCaptchaProvider
+            reCaptchaKey={siteKey}
+            language="uz"
+            container={{
+                parameters: {
+                    badge: 'bottomright',
+                    theme: 'dark',
+                },
+            }}
+        >
             <section id="contact" className="contact-section">
                 <div className="container">
                     <div
@@ -163,18 +183,7 @@ const Contact: React.FC = () => {
                             bog'lanib ko'ramiz
                         </h2>
                     </div>
-                    <p
-                        className="section-description text-start"
-                        data-aos="fade-up"
-                        data-aos-delay="200"
-                    >
-                        Xabar yo'llash uchun quyidagi formani to'ldiring.
-                    </p>
-                    <div
-                        className="row mt-5"
-                        data-aos="zoom-in"
-                        data-aos-delay="300"
-                    >
+                    <div className="row mt-5">
                         <div className="col-12">
                             <ContactForm />
                         </div>

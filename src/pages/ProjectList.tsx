@@ -24,10 +24,11 @@ const ProjectList: React.FC = () => {
                 <div className="projects-grid">
                     {projects.map((project, index) => (
                         <div
-                            key={project.id}
+                            // Unique key xatosini oldini olish uchun id va index birlashtirildi
+                            key={`${project.id || 'project'}-${index}`}
                             className="project-card"
                             data-aos="fade-up"
-                            data-aos-delay={index * 200}
+                            data-aos-delay={index * 150}
                         >
                             <div className="project-image-wrapper">
                                 <img
@@ -50,8 +51,11 @@ const ProjectList: React.FC = () => {
                                                     target="_blank"
                                                     rel="noreferrer"
                                                     title="GitHub"
+                                                    onClick={(e) =>
+                                                        e.stopPropagation()
+                                                    }
                                                 >
-                                                    <Github size={22} />
+                                                    <Github size={20} />
                                                 </a>
                                             )}
                                             {project.project_link && (
@@ -60,14 +64,17 @@ const ProjectList: React.FC = () => {
                                                     target="_blank"
                                                     rel="noreferrer"
                                                     title="Demo"
+                                                    onClick={(e) =>
+                                                        e.stopPropagation()
+                                                    }
                                                 >
-                                                    <ExternalLink size={22} />
+                                                    <ExternalLink size={20} />
                                                 </a>
                                             )}
                                         </div>
                                     </div>
                                     <div className="project-arrow">
-                                        <ArrowRight size={30} strokeWidth={1} />
+                                        <ArrowRight size={32} strokeWidth={1} />
                                     </div>
                                 </div>
                             </div>
