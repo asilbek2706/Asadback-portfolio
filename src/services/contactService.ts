@@ -7,8 +7,8 @@ export interface ContactFormData {
     message: string;
 }
 
-export interface ContactRequest extends ContactFormData {
-    readonly recaptcha_token: string;
+export interface ContactRequest extends ContactFormData{
+    recaptcha_token: string;
 }
 
 export const getQuestions = async (): Promise<Question[]> => {
