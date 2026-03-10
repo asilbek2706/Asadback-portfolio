@@ -138,9 +138,7 @@ const ContactForm: React.FC = () => {
                         </svg>
                     </div>
                 </button>
-                <p className="required-note">
-                    * Belgilangan maydonlarni to'ldirish kerak.
-                </p>
+                <p className="required-note">* Ma'lumotlarni kiriting.</p>
             </div>
 
             {(isSuccess || error) && (
@@ -177,11 +175,7 @@ const Contact: React.FC = () => {
                         className="section-title text-start"
                         data-aos="fade-up"
                     >
-                        <h2>
-                            Keling fikr almashish uchun
-                            <br />
-                            bog'lanib ko'ramiz
-                        </h2>
+                        <h2>Fikrlaringiz men uchun muhim</h2>
                     </div>
                     <div className="row mt-5">
                         <div className="col-12">

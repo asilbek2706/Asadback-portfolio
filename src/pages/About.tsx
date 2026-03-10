@@ -9,12 +9,12 @@ const About: React.FC = () => {
     if (!aboutInfo) return null;
 
     const skills = [
-        { name: 'Python / Django', icon: <Code2 size={16} /> },
-        { name: 'PostgreSQL', icon: <Database size={16} /> },
-        { name: 'Rest API', icon: <Globe size={16} /> },
-        { name: 'Docker', icon: <Layers size={16} /> },
-        { name: 'Redis', icon: <Cpu size={16} /> },
-        { name: 'Celery', icon: <Layout size={16} /> },
+        { name: 'Django / Flask', icon: <Code2 size={16} /> },
+        { name: 'PostgreSQL / MySQL', icon: <Database size={16} /> },
+        { name: 'Rest API / fast api', icon: <Globe size={16} /> },
+        { name: 'Redis / Celery', icon: <Cpu size={16} /> },
+        { name: 'Kubernets / Docker', icon: <Layers size={16} /> },
+        { name: 'Rappidmq / kafka', icon: <Layout size={16} /> },
     ];
 
     return (

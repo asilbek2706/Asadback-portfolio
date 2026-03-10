@@ -16,7 +16,7 @@ const Hero: React.FC = () => {
                     data-aos-delay="200"
                 >
                     <span className="text-uppercase small tracking-widest text-secondary fw-bold">
-                        O‘zimni tanishtirsam
+                        Kimman o‘zi
                     </span>
                     <div className="divider-short my-3"></div>
                 </header>
@@ -26,9 +26,10 @@ const Hero: React.FC = () => {
                     data-aos="fade-up"
                     data-aos-delay="400"
                 >
-                    Django bilan ishlashdan <br />
-                    <span className="text-opacity-75">zavqlanuvchi</span> <br />
-                    <span className="fw-normal">dasturchi</span>
+                    Yechimlarga <br />
+                    <span className="text-opacity-75">yo'naltirilgan</span>{' '}
+                    <br />
+                    <span className="fw-normal">backend dasturchi</span>
                 </h1>
 
                 <p

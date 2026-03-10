@@ -35,12 +35,6 @@ const Navbar: React.FC = () => {
 
     return (
         <nav className="custom-navbar">
-            <div className="nav-logo">
-                <a href="#about" onClick={(e) => handleScroll(e, 'about')}>
-                    ASADBEK
-                </a>
-            </div>
-
             <div className="nav-actions">
                 <div
                     className={`menu-toggle ${isOpen ? 'open' : ''}`}
